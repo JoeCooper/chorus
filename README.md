@@ -10,6 +10,12 @@ Chorus depends on Python 3.9 or later, alone, without dependencies, and will run
 
 The script can be saved directly to any `/bin` directory, and set executable with `chmod +x`.
 
+On Linux or macOS, you can do this with `curl` like so:
+
+```bash
+curl -o /usr/local/bin/chorus https://raw.githubusercontent.com/JoeCooper/chorus/refs/heads/master/chorus.py && chmod +x /usr/local/bin/chorus
+```
+
 ## How It Works
 
 In short, we need to build a plan featuring messages, content, requirements, settings, and an API key or base URL. Some of these have reasonable defaults. Some settings you will want to share between activities. Some settings you will want to override for a single activity. And some, you will want to override just once.
