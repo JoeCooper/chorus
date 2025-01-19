@@ -1,0 +1,27 @@
+{
+  "model": "gpt-4o-mini",
+  "temperature": 1.2,
+  "jsonValidate": false,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write a single sentence featuring the given word."
+    },
+    {
+      "role": "user",
+      "content": "phantom"
+    },
+    {
+      "role": "assistant",
+      "content": "The phantom of the opera is a ghost."
+    },
+    {
+      "role": "user",
+      "content": "loaf"
+    },
+    {
+      "role": "assistant",
+      "content": "Meatloaf's 'Bat out of Hell' is a classic."
+    }
+  ]
+}

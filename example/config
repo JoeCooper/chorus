@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://api.openai.com/v1",
+  "threads": 16,
+  "maxRetries": 3,
+  "output": "jsonl"
+}
