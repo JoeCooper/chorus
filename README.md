@@ -36,6 +36,7 @@ First, if the file begins with `{`, it is assumed to contain a JSON dictionary w
 | `apiKey` | string | Required | The API key to use for requests. |
 | `baseUrl` | string | `https://api.openai.com/v1` | The base URL to use for requests. |
 | `workers` | int | `16` | The number of workers to use for requests. |
+| `requestsPerSecond` | int | `128` | The maximum number of requests per second to make. |
 | `maxRetries` | int | `3` | The maximum number of retries to make for a request. |
 | `output` | string | `csv` | The output format to use. |
 | `model` | string | `gpt-4o-mini` | The model to use for requests. |

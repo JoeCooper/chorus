@@ -34,7 +34,8 @@ plan: PlanDict = {
   "baseUrl": "https://api.openai.com/v1",
   "apiKey": os.getenv("OPENAI_API_KEY"),
   "skip": 0,
-  "output": "csv"
+  "output": "csv",
+  "requestsPerSecond": 128
 }
 
 argument_iterator = iter(sys.argv[1:])
@@ -98,11 +99,31 @@ assert 'baseUrl' in plan, "Base URL must be provided"
 assert plan['skip'] >= 0, "Skip must be greater than or equal to 0"
 assert plan['maxRetries'] >= 0, "Max retries must be greater than or equal to 0"
 
+import time
+
+def touch_temporal_cursor(cursor: float, period: float) -> tuple[float, float]:
+  now: float = time.time()
+  if now > cursor:
+    return (now + period, 0)
+  pause = cursor - now
+  cursor = cursor + period
+  return (cursor, pause)
+
+temporal_cursor: float = time.time()
+period: float = 1.0 / float(plan['requestsPerSecond'])
+
+def throttle():
+  global temporal_cursor
+  temporal_cursor, pause = touch_temporal_cursor(temporal_cursor, period)
+  if pause > 0:
+    time.sleep(pause)
+
 def call(
     plan: PlanDict,
     sample: str,
     attempt: int = 0,
 ) -> tuple[str, str]:
+  throttle()
   headers = {
     "Authorization": f"Bearer {plan['apiKey']}",
     "Content-Type": "application/json",
