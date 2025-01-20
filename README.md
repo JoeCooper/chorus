@@ -51,7 +51,7 @@ If any property is specified twice, the latter claim will _override_ the former.
 Any property can be overridden via command line arguments:
 
 ```bash
-chorus planfile samplefile --model gpt-4o-mini --temperature 0.5
+chorus promptfile samplefile --model gpt-4o-mini --temperature 0.5
 ```
 
 ### Messages
@@ -89,7 +89,7 @@ When reading any such file, Chorus will add each sample to the plan.
 You can also specify samples on the command line, using the `--sample` argument. Note this is singular, and deviates from other properties.
 
 ```bash
-chorus planfile --sample phantom --sample opera --sample Christine
+chorus promptfile --sample phantom --sample opera --sample Christine
 ```
 
 ### Multiple Sample Files
@@ -97,7 +97,7 @@ chorus planfile --sample phantom --sample opera --sample Christine
 Unlike other properties, samples are _combined,_ and not overridden.
 
 ```bash
-chorus planfile samplefile1 samplefile2
+chorus promptfile samplefile1 samplefile2
 ```
 
 ## Output
@@ -121,8 +121,10 @@ turnscrew,He expertly used a turnscrew to tighten the delicate machinery.
 Chorus can write JSONL, in which each line is a JSON dictionary with `sample` and `content` properties.
 
 ```bash
-chorus planfile samplefile --output jsonl
+chorus promptfile samplefile --output jsonl
 ```
+
+(As a reminder, while this example shows `output` as a parameter, it can also be specified in a file.)
 
 ```jsonl
 {"sample": "elytrum", "content": "The elytrum of the beetle shone brilliantly under the sunlight."}
