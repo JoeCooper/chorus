@@ -129,6 +129,8 @@ def call(
     "Content-Type": "application/json",
   }
   first_attempt = attempt == 0
+  if not first_attempt:
+    print(f"Retrying {sample} with attempt {attempt + 1}", file=stderr)
   temperature = float(plan['temperature'])
   temperature = temperature if first_attempt else max(0.5, temperature)
   messages = plan['messages'] + [{
@@ -140,6 +142,10 @@ def call(
     "temperature": temperature,
     "messages": messages,
   }
+  if plan['jsonValidate']:
+    data['response_format'] = {
+      "type": "json_object",
+    }
   import json
   submission = json.dumps(data)
   result = None
@@ -171,6 +177,11 @@ def call(
     else:
       return call(plan, sample, attempt - 1)
   content = result["choices"][0]["message"]["content"]
+  if plan['jsonValidate']:
+    try:
+      _ = json.loads(content)
+    except Exception as e:
+      return call(plan, sample, attempt + 1)
   return sample, content
 
 samples = plan['samples'][plan['skip']:]
