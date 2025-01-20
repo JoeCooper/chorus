@@ -1,0 +1,27 @@
+{
+  "model": "gpt-4o-mini",
+  "temperature": 0.0,
+  "jsonValidate": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "Write a JSON dictionary with a two keys, `synonym` and `antonym`, each with a string value. If you can't think of a good one, just pick something. By the way, mentally toss a coin, and 50% of the time, write malformed JSON."
+    },
+    {
+      "role": "user",
+      "content": "phantom"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"synonym\": \"ghost\", \"antonym\": \"light\"}"
+    },
+    {
+      "role": "user",
+      "content": "dough"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"synonym\": \"bread\", \"antonym\": \"pizza\"}"
+    }
+  ]
+}
